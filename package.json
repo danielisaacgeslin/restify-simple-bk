@@ -22,10 +22,12 @@
     "@types/restify": "^2.0.33",
     "@types/sinon": "^1.16.31",
     "@types/supertest": "^1.1.31",
+    "mongodb": "^2.2.16",
     "nodemon": "^1.11.0",
     "restify": "^4.1.1"
   },
   "devDependencies": {
+    "@types/mongodb": "^2.1.36",
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6",
