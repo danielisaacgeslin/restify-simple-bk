@@ -1,7 +1,7 @@
 {
-  "name": "restify-typescript-seed",
+  "name": "restify-simple-bk",
   "version": "1.0.0",
-  "description": "a seed project for creating http service using restify written in typescript",
+  "description": "restify-simple-bk  (seed from Sul.Aga)",
   "main": "app.js",
   "scripts": {
     "test": "node_modules/.bin/_mocha test/unit/**/*.spec.js",
@@ -13,8 +13,8 @@
     "typescript",
     "restify"
   ],
-  "author": "Sul.Aga",
-  "license": "MIT",
+  "author": "",
+  "license": "",
   "dependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
