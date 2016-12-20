@@ -6,7 +6,7 @@
     "sourceMap": true,
     "removeComments": false,
     "noImplicitReturns": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "preserveConstEnums": true
   },
   "exclude": [
