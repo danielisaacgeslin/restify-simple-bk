@@ -17,37 +17,33 @@ export default class ArticleRouteController {
 
 	public get(req: restify.Request, res: restify.Response, next: restify.Next) {
 		MongoClient.connect(DB_URI).then((db) => {
-			db.collection(this.collectionName).find(req.query).toArray().then(
-				r => this.rh.successHandler(r, res, next),
-				e => this.rh.errorHandler(e, res, next)
-			);
+			db.collection(this.collectionName).find(req.query).toArray()
+				.then(r => this.rh.successHandler(r, res, next), e => this.rh.errorHandler(e, res, next))
+				.then(()=>{db.close()});
 		});
 	}
 
 	public post(req: restify.Request, res: restify.Response, next: restify.Next) {
 		MongoClient.connect(DB_URI).then((db) => {
-			db.collection(this.collectionName).insert(req.params).then(
-				r => this.rh.successHandler(req.params, res, next),
-				e => this.rh.errorHandler(e, res, next)
-			);
+			db.collection(this.collectionName).insert(req.params)
+				.then(r => this.rh.successHandler(req.params, res, next), e => this.rh.errorHandler(e, res, next))
+				.then(()=>{db.close()});
 		});
 	}
 
 	public put(req: restify.Request, res: restify.Response, next: restify.Next) {
 		MongoClient.connect(DB_URI).then((db) => {
-			db.collection(this.collectionName).update(req.query, req.params).then(
-				r => this.rh.successHandler(req.params, res, next),
-				e => this.rh.errorHandler(e, res, next)
-			);
+			db.collection(this.collectionName).update(req.query, req.params)
+				.then(r => this.rh.successHandler(req.params, res, next), e => this.rh.errorHandler(e, res, next))
+				.then(()=>{db.close()});
 		});
 	}
 
 	public del(req: restify.Request, res: restify.Response, next: restify.Next) {
 		MongoClient.connect(DB_URI).then((db) => {
-			db.collection(this.collectionName).deleteOne(req.query).then(
-				r => this.rh.successHandler(r, res, next),
-				e => this.rh.errorHandler(e, res, next)
-			);
+			db.collection(this.collectionName).deleteOne(req.query)
+				.then(r => this.rh.successHandler(r, res, next), e => this.rh.errorHandler(e, res, next))
+				.then(()=>{db.close()});
 		});
 	}
 
