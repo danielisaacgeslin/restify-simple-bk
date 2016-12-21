@@ -1,12 +1,12 @@
 #Instalation
-*npm install
+* npm install
 
 #Run the App
-*npm start `(you must have local mongoDB running)`
+* npm start `(you must have local mongoDB running)`
 
 #Develop
-*terminal 1 : tsc -w
-*terminal 2: npm start
+* terminal 1 : tsc -w
+* terminal 2: npm start
 
 #Endpoints
 * `http://localhost:3000`/api/article `(GET - filter with query string)`
