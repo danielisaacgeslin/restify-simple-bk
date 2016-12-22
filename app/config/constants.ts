@@ -1,1 +1,2 @@
 export const DB_URI: string = 'mongodb://localhost:27017/restify-simple-bk';
+export const DYNAMO_CONFIG = { region: '1', credentials: { accessKeyId: '1', secretAccessKey: '1' }, httpOptions: { proxy: 'http://localhost:8000' } };
