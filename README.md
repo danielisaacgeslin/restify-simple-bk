@@ -16,5 +16,5 @@
 
 #DynamoDB Endpoint
 * `http://localhost:3000`/api/music `(GET all items)`
-* `http://localhost:3000`/api/music?artist=<string>&songTitle<string> `(POST - send data on body)`
+* `http://localhost:3000`/api/music?artist=string&songTitle=string `(POST - send data on body)`
 * `http://localhost:3000`/api/music/create-table `(POST - creates music table)`
