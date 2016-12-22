@@ -1,31 +1,35 @@
 import * as restify from 'restify';
 import * as AWS from 'aws-sdk';
+import * as dynamoose from 'dynamoose';
 import { logger } from '../services/logger';
 import { DYNAMO_CONFIG } from '../config/constants';
 import { ResponseHandler } from '../services/ResponseHandler';
 
-export default class SampleRouteController {
+export default class DynamooseRouteController {
 	private rh: ResponseHandler = new ResponseHandler();
+	private model;
+	private table;
 
 	constructor() {
-		this.createDynamoDbTable = this.createDynamoDbTable.bind(this);
+		AWS.config.update(DYNAMO_CONFIG);
+		dynamoose.setDefaults( { create: true }); //creates the table if it doesnt exists
+		this.model = dynamoose.model('Music', { Artist: String, SongTitle: String });
+
 		this.get = this.get.bind(this);
 		this.post = this.post.bind(this);
 	}
 
 	public get(req: restify.Request, res: restify.Response, next: restify.Next) {
-		const db = new AWS.DynamoDB();
-		db.config.update(DYNAMO_CONFIG);
-		new Promise((resolve, reject)=>{
-			db.scan({TableName: 'Music'}, (error, data)=>{
-				if(error) return reject(error);
+		new Promise((resolve, reject) => {
+			this.model.scan({/*filter*/ }, {/*options*/ }, (error, data) => {
+				if (error) return reject(error);
 				resolve(data);
 			});
 		})
-		.then(
+			.then(
 			data => this.rh.successHandler(data, res, next),
 			error => this.rh.errorHandler(error, res, next)
-		);
+			);
 	}
 
 	public createDynamoDbTable(req: restify.Request, res: restify.Response, next: restify.Next) {
@@ -46,38 +50,28 @@ export default class SampleRouteController {
 				WriteCapacityUnits: 10
 			}
 		};
-		new Promise((resolve, reject)=>{
-			db.createTable(params, (error, data)=>{
-				if(error) return reject(error);
+		new Promise((resolve, reject) => {
+			db.createTable(params, (error, data) => {
+				if (error) return reject(error);
 				resolve(data);
 			});
 		})
-		.then(
+			.then(
 			data => this.rh.successHandler(data, res, next),
 			error => this.rh.errorHandler(error, res, next)
-		);
+			);
 	}
 
 	public post(req: restify.Request, res: restify.Response, next: restify.Next) {
-		const db = new AWS.DynamoDB();
-		db.config.update(DYNAMO_CONFIG);
-		const params = {
-			"TableName": "Music",
-			"Item": {
-				"Artist": { "S": req.params.artist },
-				"SongTitle": { "S": req.params.songTitle }
-			}
-		};
-
-		new Promise((resolve, reject)=>{
-			db.putItem(params, (error, data)=>{
-				if(error) return reject(error);
+		new Promise((resolve, reject) => {
+			this.model.create(req.params, (error, data) => {
+				if (error) return reject(error);
 				resolve(data);
 			});
 		})
 		.then(
 			data => this.rh.successHandler(data, res, next),
 			error => this.rh.errorHandler(error, res, next)
-		);
+			);
 	}
 }

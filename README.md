@@ -15,6 +15,12 @@
 * `http://localhost:3000`/api/article `(DELETE - filter with query string)`
 
 #DynamoDB Endpoint
+
+#AWS SDK
 * `http://localhost:3000`/api/music `(GET all items)`
-* `http://localhost:3000`/api/music?artist=string&songTitle=string `(POST - send data on body)`
+* `http://localhost:3000`/api/music `(POST - send data on body <Artist=string&SongTitle=string> )`
 * `http://localhost:3000`/api/music/create-table `(POST - creates music table)`
+
+#Dynamoose
+* `http://localhost:3000`/api/dynamoose `(GET all items)`
+* `http://localhost:3000`/api/dynamoose?artist=string&songTitle=string `(POST - send data on body <Artist=string&SongTitle=string>)`
